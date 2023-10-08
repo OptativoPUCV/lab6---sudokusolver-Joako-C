@@ -122,40 +122,12 @@ int is_final(Node* n) {
 
 
 Node* DFS(Node* initial, int* cont) {
-    List* stack = createList(); // Creamos una pila (stack)
-    pushFront(stack, initial); // Insertamos el nodo inicial en la pila
 
-    while (!is_empty(stack)) {
-        Node* current = (Node*)front(stack); // Sacamos el primer nodo de la pila
-        popFront(stack);
-
-        if (is_final(current)) {
-            return current; // Si es un estado final, lo retornamos como solución
-        }
-
-        List* adj_nodes = get_adj_nodes(current); // Obtenemos los nodos adyacentes
-
-        while (!is_empty(adj_nodes)) {
-            Node* adj_node = (Node*)front(adj_nodes);
-            popFront(adj_nodes);
-
-            if (is_valid(adj_node)) {
-                pushFront(stack, adj_node); // Agregamos el nodo adyacente a la pila
-                (*cont)++;
-            } else {
-                free(adj_node); // Liberamos la memoria del nodo no válido
-            }
-        }
-
-        // No liberamos la memoria de la lista de nodos adyacentes aquí
-    }
-
-    return NULL; // Si no se encontró una solución, retornamos NULL
 }
 
 
 
-int main( int argc, char *argv[] ){
+int main( int argc, char *argv[]) {
 
   Node* initial= read_file("s12a.txt");;
 
