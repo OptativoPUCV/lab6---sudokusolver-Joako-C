@@ -282,3 +282,33 @@ Sun 08 Oct 2023 09:26:18 PM UTC:
  tests:  7|1
 total_score: 55/70
 63f4f07
+Sun 08 Oct 2023 09:27:50 PM UTC: 
+ sudoku.c | 35 +++++++++++++++++++++++++++++------
+ 1 file changed, 29 insertions(+), 6 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:147:11: error: implicit declaration of function ‘isEmpty’; did you mean ‘is_empty’? [-Werror=implicit-function-declaration]
+  147 |   while (!isEmpty(stack)) {
+      |           ^~~~~~~
+      |           is_empty
+sudoku.c:154:7: error: implicit declaration of function ‘freeStack’; did you mean ‘createStack’? [-Werror=implicit-function-declaration]
+  154 |       freeStack(stack);
+      |       ^~~~~~~~~
+      |       createStack
+sudoku.c:159:18: error: implicit declaration of function ‘getFirst’ [-Werror=implicit-function-declaration]
+  159 |     Node* next = getFirst(adj_nodes);
+      |                  ^~~~~~~~
+sudoku.c:159:18: error: initialization of ‘Node *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+sudoku.c:163:14: error: implicit declaration of function ‘getNext’ [-Werror=implicit-function-declaration]
+  163 |       next = getNext(adj_nodes);
+      |              ^~~~~~~
+sudoku.c:163:12: error: assignment to ‘Node *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+  163 |       next = getNext(adj_nodes);
+      |            ^
+sudoku.c:166:5: error: implicit declaration of function ‘freeList’; did you mean ‘createList’? [-Werror=implicit-function-declaration]
+  166 |     freeList(adj_nodes);
+      |     ^~~~~~~~
+      |     createList
+cc1: all warnings being treated as errors
+Compilation failed
+ac34d6d
