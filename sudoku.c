@@ -93,27 +93,45 @@ int is_valid(Node* n) {
 
 List* get_adj_nodes(Node* n) {
   List* list = createList();
-
+  
+  // Encuentra la primera celda vacía en el sudoku.
+  int empty_row = -1;
+  int empty_col = -1;
   for (int row = 0; row < 9; row++) {
     for (int col = 0; col < 9; col++) {
       if (n->sudo[row][col] == 0) {
-        for (int num = 1; num <= 9; num++) {
-          Node* adj_node = copy(n);
-          adj_node->sudo[row][col] = num;
-          if (is_valid(adj_node)) {
-            pushBack(list, adj_node);
-          } else {
-            // Si el nodo no es válido, debes liberar la memoria.
-            free(adj_node);
-          }
-        }
-        // Importante: detener la generación de nodos si uno ya es inválido en esta posición.
+        empty_row = row;
+        empty_col = col;
         break;
       }
     }
+    if (empty_row != -1) {
+      break;
+    }
   }
+
+  // Si no hay celdas vacías, no hay nodos adyacentes.
+  if (empty_row == -1) {
+    return list;
+  }
+
+  // Intenta colocar números del 1 al 9 en la celda vacía.
+  for (int num = 1; num <= 9; num++) {
+    Node* adj_node = copy(n);
+    adj_node->sudo[empty_row][empty_col] = num;
+    
+    // Verifica si la colocación es válida.
+    if (is_valid(adj_node)) {
+      pushBack(list, adj_node);
+    } else {
+      // Si el nodo no es válido, debes liberar la memoria.
+      free(adj_node);
+    }
+  }
+
   return list;
 }
+
 
 
 
