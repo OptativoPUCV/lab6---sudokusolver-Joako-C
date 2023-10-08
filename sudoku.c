@@ -88,11 +88,40 @@ int is_valid(Node* n) {
 }
 
 
+List* get_adj_nodes(Node* n, int row, int col) {
+  List* list = createList();
 
-List* get_adj_nodes(Node* n){
-    List* list=createList();
-    return list;
+  for (int j = 0; j < 9; j++) {
+    if (j != col) {
+      Node* adj_node = copy(n);
+      adj_node->sudo[row][col] = adj_node->sudo[row][j];
+      adj_node->sudo[row][j] = n->sudo[row][col];
+      pushBack(list, adj_node); lista
+        }
+  }
+  for (int i = 0; i < 9; i++) {
+    if (i != row) {
+      Node* adj_node = copy(n);
+      adj_node->sudo[row][col] = adj_node->sudo[i][col];
+      adj_node->sudo[i][col] = n->sudo[row][col];
+      pushBack(list, adj_node);
+    }
+  }
+  int startRow = (row / 3) * 3;
+  int startCol = (col / 3) * 3;
+  for (int i = startRow; i < startRow + 3; i++) {
+    for (int j = startCol; j < startCol + 3; j++) {
+      if (i != row || j != col) {
+        Node* adj_node = copy(n);
+        adj_node->sudo[row][col] = adj_node->sudo[i][j];
+        adj_node->sudo[i][j] = n->sudo[row][col];
+        pushBack(list, adj_node);
+      }
+    }
+  }
+  return list;
 }
+
 
 
 int is_final(Node* n){

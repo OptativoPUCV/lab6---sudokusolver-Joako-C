@@ -26,3 +26,44 @@ Sun 08 Oct 2023 03:44:40 PM UTC:
  tests:  0|5
 total_score: 0/70
 5959a49
+Sun 08 Oct 2023 03:52:53 PM UTC: 
+ sudoku.c | 32 ++++++++++++++++++++++++++++++--
+ 1 file changed, 30 insertions(+), 2 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:99:33: error: ‘lista’ undeclared (first use in this function); did you mean ‘list’?
+   99 |       pushBack(list, adj_node); lista
+      |                                 ^~~~~
+      |                                 list
+sudoku.c:99:33: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:99:38: error: expected ‘;’ before ‘}’ token
+   99 |       pushBack(list, adj_node); lista
+      |                                      ^
+      |                                      ;
+  100 |         }
+      |         ~                             
+test.c: In function ‘adj_test1’:
+test.c:62:17: error: too few arguments to function ‘get_adj_nodes’
+   62 |     List* adj = get_adj_nodes(initial);
+      |                 ^~~~~~~~~~~~~
+In file included from test.c:5:
+sudoku.c:91:7: note: declared here
+   91 | List* get_adj_nodes(Node* n, int row, int col) {
+      |       ^~~~~~~~~~~~~
+test.c:95:11: error: too few arguments to function ‘get_adj_nodes’
+   95 |     adj = get_adj_nodes(initial);
+      |           ^~~~~~~~~~~~~
+In file included from test.c:5:
+sudoku.c:91:7: note: declared here
+   91 | List* get_adj_nodes(Node* n, int row, int col) {
+      |       ^~~~~~~~~~~~~
+test.c: In function ‘test_mod_adj’:
+test.c:155:17: error: too few arguments to function ‘get_adj_nodes’
+  155 |     List* adj = get_adj_nodes(initial);
+      |                 ^~~~~~~~~~~~~
+In file included from test.c:5:
+sudoku.c:91:7: note: declared here
+   91 | List* get_adj_nodes(Node* n, int row, int col) {
+      |       ^~~~~~~~~~~~~
+Compilation failed
+a31911c
