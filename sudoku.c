@@ -44,66 +44,41 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n) {
-    int used[10]; // Para marcar los números que aparecen en una fila, columna o submatriz
+    int row_check[9][10] = {0}; // Para verificar números en filas
+    int col_check[9][10] = {0}; // Para verificar números en columnas
+    int subgrid_check[9][10] = {0}; // Para verificar números en submatrices de 3x3
 
-    // Verificar filas
     for (int row = 0; row < 9; row++) {
-        for (int i = 1; i <= 9; i++) {
-            used[i] = 0; // Inicializar el arreglo a 0
-        }
-
         for (int col = 0; col < 9; col++) {
             int num = n->sudo[row][col];
-            
-            if (used[num] == 1 || num < 1 || num > 9) {
-                return 0; // Número repetido o fuera de rango
-            }
-            
-            used[num] = 1; // Marcar el número como usado
-        }
-    }
 
-    // Verificar columnas
-    for (int col = 0; col < 9; col++) {
-        for (int i = 1; i <= 9; i++) {
-            used[i] = 0; // Inicializar el arreglo a 0
-        }
-
-        for (int row = 0; row < 9; row++) {
-            int num = n->sudo[row][col];
-
-            if (used[num] == 1 || num < 1 || num > 9) {
-                return 0; // Número repetido o fuera de rango
+            if (num < 1 || num > 9) {
+                return 0; // Número fuera de rango
             }
 
-            used[num] = 1; // Marcar el número como usado
-        }
-    }
-
-    // Verificar submatrices de 3x3
-    for (int startRow = 0; startRow < 9; startRow += 3) {
-        for (int startCol = 0; startCol < 9; startCol += 3) {
-            for (int i = 1; i <= 9; i++) {
-                used[i] = 0; // Inicializar el arreglo a 0
+            // Verificar fila
+            if (row_check[row][num] == 1) {
+                return 0; // Número repetido en la fila
             }
+            row_check[row][num] = 1;
 
-            for (int row = startRow; row < startRow + 3; row++) {
-                for (int col = startCol; col < startCol + 3; col++) {
-                    int num = n->sudo[row][col];
-
-                    if (used[num] == 1 || num < 1 || num > 9) {
-                        return 0; // Número repetido o fuera de rango
-                    }
-
-                    used[num] = 1; // Marcar el número como usado
-                }
+            // Verificar columna
+            if (col_check[col][num] == 1) {
+                return 0; // Número repetido en la columna
             }
+            col_check[col][num] = 1;
+
+            // Verificar submatriz de 3x3
+            int subgrid = (row / 3) * 3 + (col / 3);
+            if (subgrid_check[subgrid][num] == 1) {
+                return 0; // Número repetido en la submatriz
+            }
+            subgrid_check[subgrid][num] = 1;
         }
     }
 
     return 1; // Si pasa todas las verificaciones, el Sudoku es válido
 }
-
 
 
 
