@@ -44,52 +44,54 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n) {
-    // Verificar filas y columnas
-    for (int i = 0; i < 9; i++) {
-        int row_used[10] = {0};
-        int col_used[10] = {0};
+    int used[10]; // Para marcar los números que aparecen en una fila, columna o submatriz
 
-        for (int j = 0; j < 9; j++) {
-            // Verificar filas
-            int num_row = n->sudo[i][j];
-            if (num_row < 1 || num_row > 9 || row_used[num_row]) {
-                return 0;
-            }
-            row_used[num_row] = 1;
+    // Verificar filas
+    for (int row = 0; row < 9; row++) {
+        memset(used, 0, sizeof(used)); // Inicializar el arreglo a 0
 
-            // Verificar columnas
-            int num_col = n->sudo[j][i];
-            if (num_col < 1 || num_col > 9 || col_used[num_col]) {
-                return 0;
+        for (int col = 0; col < 9; col++) {
+            int num = n->sudo[row][col];
+            
+            if (used[num] == 1 || num < 1 || num > 9) {
+                return 0; // Número repetido o fuera de rango
             }
-            col_used[num_col] = 1;
+            
+            used[num] = 1; // Marcar el número como usado
         }
     }
 
-    // Verificar regiones de 3x3
+    // Verificar columnas
+    for (int col = 0; col < 9; col++) {
+        memset(used, 0, sizeof(used)); // Inicializar el arreglo a 0
+
+        for (int row = 0; row < 9; row++) {
+            int num = n->sudo[row][col];
+
+            if (used[num] == 1 || num < 1 || num > 9) {
+                return 0; // Número repetido o fuera de rango
+            }
+
+            used[num] = 1; // Marcar el número como usado
+        }
+    }
+
+    // Verificar submatrices de 3x3
     for (int startRow = 0; startRow < 9; startRow += 3) {
         for (int startCol = 0; startCol < 9; startCol += 3) {
-            int region_used[10] = {0};
+            memset(used, 0, sizeof(used)); // Inicializar el arreglo a 0
 
-            for (int i = startRow; i < startRow + 3; i++) {
-                for (int j = startCol; j < startCol + 3; j++) {
-                    int num = n->sudo[i][j];
-                    if (num < 1 || num > 9 || region_used[num]) {
-                        return 0;
+            for (int row = startRow; row < startRow + 3; row++) {
+                for (int col = startCol; col < startCol + 3; col++) {
+                    int num = n->sudo[row][col];
+
+                    if (used[num] == 1 || num < 1 || num > 9) {
+                        return 0; // Número repetido o fuera de rango
                     }
-                    region_used[num] = 1;
+
+                    used[num] = 1; // Marcar el número como usado
                 }
             }
-        }
-    }
-
-    // Verificar nodos adyacentes para completitud
-    List* adj_nodes = get_adj_nodes(n);
-    while (!is_empty(adj_nodes)) {
-        Node* adj_node = (Node*)front(adj_nodes);
-        popFront(adj_nodes);
-        if (!is_valid(adj_node)) {
-            return 0; // Si un nodo adyacente no es válido, el Sudoku no es válido
         }
     }
 

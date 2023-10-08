@@ -116,3 +116,9 @@ sudoku.c:87:23: note: previous implicit declaration of ‘get_adj_nodes’ was h
 cc1: all warnings being treated as errors
 Compilation failed
 88b85ea
+Sun 08 Oct 2023 04:34:30 PM UTC: 
+ sudoku.c | 64 +++++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 33 insertions(+), 31 deletions(-)
+ tests:  3|3
+total_score: 25/70
+03ef28c
