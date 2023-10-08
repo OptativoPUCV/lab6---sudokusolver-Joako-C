@@ -44,43 +44,49 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n) {
-  bool used[10];
+  int used[10];
 
   for (int i = 0; i < 9; i++) {
-    memset(used, false, sizeof(used));
+    for (int j = 0; j < 10; j++) {
+      used[j] = 0;
+    }
     for (int j = 0; j < 9; j++) {
       int num = n->sudo[i][j];
       if (num < 1 || num > 9 || used[num]) {
         return 0;
       }
-      used[num] = true;
+      used[num] = 1;
     }
-    memset(used, false, sizeof(used));
+    for (int j = 0; j < 10; j++) {
+      used[j] = 0;
+    }
     for (int j = 0; j < 9; j++) {
       int num = n->sudo[j][i];
       if (num < 1 || num > 9 || used[num]) {
         return 0;
       }
-      used[num] = true;
+      used[num] = 1;
     }
   }
-  
   for (int startRow = 0; startRow < 9; startRow += 3) {
     for (int startCol = 0; startCol < 9; startCol += 3) {
-      memset(used, false, sizeof(used));
+      for (int j = 0; j < 10; j++) {
+        used[j] = 0;
+      }
       for (int i = startRow; i < startRow + 3; i++) {
         for (int j = startCol; j < startCol + 3; j++) {
           int num = n->sudo[i][j];
           if (num < 1 || num > 9 || used[num]) {
             return 0;
           }
-          used[num] = true;
+          used[num] = 1;
         }
       }
     }
   }
   return 1;
 }
+
 
 
 List* get_adj_nodes(Node* n){
