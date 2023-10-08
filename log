@@ -193,3 +193,21 @@ Sun 08 Oct 2023 08:06:21 PM UTC:
  1 file changed, 7 insertions(+), 11 deletions(-)
  tests:  0|0
 40e3fd5
+Sun 08 Oct 2023 08:13:18 PM UTC: 
+ sudoku.c | 27 ++++++++++++++++++---------
+ 1 file changed, 18 insertions(+), 9 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:150:9: error: implicit declaration of function ‘destroyList’ [-Werror=implicit-function-declaration]
+  150 |         destroyList(adj_nodes); // Liberamos la lista de nodos adyacentes
+      |         ^~~~~~~~~~~
+sudoku.c: At top level:
+sudoku.c:156:3: error: expected identifier or ‘(’ before ‘return’
+  156 |   return NULL;
+      |   ^~~~~~
+sudoku.c:157:1: error: expected identifier or ‘(’ before ‘}’ token
+  157 | }
+      | ^
+cc1: all warnings being treated as errors
+Compilation failed
+4fd3512
