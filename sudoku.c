@@ -48,7 +48,9 @@ int is_valid(Node* n) {
 
     // Verificar filas
     for (int row = 0; row < 9; row++) {
-        memset(used, 0, sizeof(used)); // Inicializar el arreglo a 0
+        for (int i = 1; i <= 9; i++) {
+            used[i] = 0; // Inicializar el arreglo a 0
+        }
 
         for (int col = 0; col < 9; col++) {
             int num = n->sudo[row][col];
@@ -63,7 +65,9 @@ int is_valid(Node* n) {
 
     // Verificar columnas
     for (int col = 0; col < 9; col++) {
-        memset(used, 0, sizeof(used)); // Inicializar el arreglo a 0
+        for (int i = 1; i <= 9; i++) {
+            used[i] = 0; // Inicializar el arreglo a 0
+        }
 
         for (int row = 0; row < 9; row++) {
             int num = n->sudo[row][col];
@@ -79,7 +83,9 @@ int is_valid(Node* n) {
     // Verificar submatrices de 3x3
     for (int startRow = 0; startRow < 9; startRow += 3) {
         for (int startCol = 0; startCol < 9; startCol += 3) {
-            memset(used, 0, sizeof(used)); // Inicializar el arreglo a 0
+            for (int i = 1; i <= 9; i++) {
+                used[i] = 0; // Inicializar el arreglo a 0
+            }
 
             for (int row = startRow; row < startRow + 3; row++) {
                 for (int col = startCol; col < startCol + 3; col++) {
@@ -97,6 +103,7 @@ int is_valid(Node* n) {
 
     return 1; // Si pasa todas las verificaciones, el Sudoku es válido
 }
+
 
 
 
