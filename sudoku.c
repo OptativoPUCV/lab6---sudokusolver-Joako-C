@@ -44,50 +44,54 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n) {
-    // Verificar filas y columnas
-    for (int i = 0; i < 9; i++) {
-        int row_check[10] = {0}; // Arreglo para verificar números en filas
-        int col_check[10] = {0}; // Arreglo para verificar números en columnas
-
-        for (int j = 0; j < 9; j++) {
-            // Verificar filas
-            int num_in_row = n->sudo[i][j];
-            if (num_in_row < 1 || num_in_row > 9 || row_check[num_in_row] == 1) {
-                return 0; // Número repetido o fuera de rango en la fila
+    // Verificar filas
+    for (int row = 0; row < 9; row++) {
+        int seen[10] = {0}; // Inicializar un arreglo para verificar números vistos
+        for (int col = 0; col < 9; col++) {
+            int num = n->sudo[row][col];
+            if (num != 0) {
+                if (seen[num] == 1) {
+                    return 0; // Número repetido en la fila
+                }
+                seen[num] = 1;
             }
-            row_check[num_in_row] = 1;
+        }
+    }
 
-            // Verificar columnas
-            int num_in_col = n->sudo[j][i];
-            if (num_in_col < 1 || num_in_col > 9 || col_check[num_in_col] == 1) {
-                return 0; // Número repetido o fuera de rango en la columna
+    // Verificar columnas
+    for (int col = 0; col < 9; col++) {
+        int seen[10] = {0}; // Inicializar un arreglo para verificar números vistos
+        for (int row = 0; row < 9; row++) {
+            int num = n->sudo[row][col];
+            if (num != 0) {
+                if (seen[num] == 1) {
+                    return 0; // Número repetido en la columna
+                }
+                seen[num] = 1;
             }
-            col_check[num_in_col] = 1;
         }
     }
 
     // Verificar submatrices de 3x3
-    for (int startRow = 0; startRow < 9; startRow += 3) {
-        for (int startCol = 0; startCol < 9; startCol += 3) {
-            int subgrid_check[10] = {0}; // Arreglo para verificar números en la submatriz
-
-            for (int i = startRow; i < startRow + 3; i++) {
-                for (int j = startCol; j < startCol + 3; j++) {
-                    // Verificar submatriz de 3x3
-                    int num_in_subgrid = n->sudo[i][j];
-                    if (num_in_subgrid < 1 || num_in_subgrid > 9 || subgrid_check[num_in_subgrid] == 1) {
-                        return 0; // Número repetido o fuera de rango en la submatriz
+    for (int i = 0; i < 9; i += 3) {
+        for (int j = 0; j < 9; j += 3) {
+            int seen[10] = {0}; // Inicializar un arreglo para verificar números vistos
+            for (int row = i; row < i + 3; row++) {
+                for (int col = j; col < j + 3; col++) {
+                    int num = n->sudo[row][col];
+                    if (num != 0) {
+                        if (seen[num] == 1) {
+                            return 0; // Número repetido en la submatriz
+                        }
+                        seen[num] = 1;
                     }
-                    subgrid_check[num_in_subgrid] = 1;
                 }
             }
         }
     }
 
-    return 1; // Si pasa todas las verificaciones, el Sudoku es válido
+    return 1; // El estado es válido
 }
-
-
 
 
 
