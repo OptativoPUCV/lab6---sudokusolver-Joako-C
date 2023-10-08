@@ -153,21 +153,40 @@ Node* DFS(Node* initial, int* cont) {
       return current;
     }
 
-    List* adj_nodes = get_adj_nodes(current);
-    node* next_node = adj_nodes->first;
-    
-    while (next_node != NULL) {
-      pushBack(stack, next_node->data);
-      next_node = next_node->next;
+    int empty_row = -1;
+    int empty_col = -1;
+    for (int row = 0; row < 9; row++) {
+      for (int col = 0; col < 9; col++) {
+        if (current->sudo[row][col] == 0) {
+          empty_row = row;
+          empty_col = col;
+          break;
+        }
+      }
+      if (empty_row != -1) {
+        break;
+      }
     }
 
-    clean(adj_nodes);
-    free(adj_nodes);
+    if (empty_row != -1) {
+      for (int num = 1; num <= 9; num++) {
+        Node* adj_node = copy(current);
+        adj_node->sudo[empty_row][empty_col] = num;
+
+        if (is_valid(adj_node)) {
+          pushBack(stack, adj_node);
+        } else {
+          free(adj_node);
+        }
+      }
+    }
+
     (*cont)++;
   }
 
   return NULL;
 }
+
 
 
 /*
