@@ -44,20 +44,20 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n) {
-    // Validar filas y columnas
+    // Verificar filas y columnas
     for (int i = 0; i < 9; i++) {
         int row_check[10] = {0}; // Arreglo para verificar números en filas
         int col_check[10] = {0}; // Arreglo para verificar números en columnas
 
         for (int j = 0; j < 9; j++) {
-            // Validar filas
+            // Verificar filas
             int num_in_row = n->sudo[i][j];
             if (num_in_row < 1 || num_in_row > 9 || row_check[num_in_row] == 1) {
                 return 0; // Número repetido o fuera de rango en la fila
             }
             row_check[num_in_row] = 1;
 
-            // Validar columnas
+            // Verificar columnas
             int num_in_col = n->sudo[j][i];
             if (num_in_col < 1 || num_in_col > 9 || col_check[num_in_col] == 1) {
                 return 0; // Número repetido o fuera de rango en la columna
@@ -66,14 +66,14 @@ int is_valid(Node* n) {
         }
     }
 
-    // Validar submatrices de 3x3
+    // Verificar submatrices de 3x3
     for (int startRow = 0; startRow < 9; startRow += 3) {
         for (int startCol = 0; startCol < 9; startCol += 3) {
             int subgrid_check[10] = {0}; // Arreglo para verificar números en la submatriz
 
             for (int i = startRow; i < startRow + 3; i++) {
                 for (int j = startCol; j < startCol + 3; j++) {
-                    // Validar submatriz de 3x3
+                    // Verificar submatriz de 3x3
                     int num_in_subgrid = n->sudo[i][j];
                     if (num_in_subgrid < 1 || num_in_subgrid > 9 || subgrid_check[num_in_subgrid] == 1) {
                         return 0; // Número repetido o fuera de rango en la submatriz
@@ -86,6 +86,7 @@ int is_valid(Node* n) {
 
     return 1; // Si pasa todas las verificaciones, el Sudoku es válido
 }
+
 
 
 
