@@ -312,3 +312,16 @@ sudoku.c:166:5: error: implicit declaration of function ‘freeList’; did you 
 cc1: all warnings being treated as errors
 Compilation failed
 ac34d6d
+Sun 08 Oct 2023 09:29:05 PM UTC: 
+ sudoku.c | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:163:22: error: called object ‘next’ is not a function or function pointer
+  163 |       next = (Node*) next(adj_nodes);
+      |                      ^~~~
+sudoku.c:159:11: note: declared here
+  159 |     Node* next = (Node*) first(adj_nodes);
+      |           ^~~~
+Compilation failed
+85db552
