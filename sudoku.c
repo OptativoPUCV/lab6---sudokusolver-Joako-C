@@ -94,40 +94,17 @@ List* get_adj_nodes(Node* n) {
   for (int row = 0; row < 9; row++) {
     for (int col = 0; col < 9; col++) {
       if (n->sudo[row][col] == 0) {
-        for (int j = 0; j < 9; j++) {
-          if (j != col) {
-            Node* adj_node = copy(n);
-            adj_node->sudo[row][col] = adj_node->sudo[row][j];
-            adj_node->sudo[row][j] = 0;
-            pushBack(list, adj_node);
-          }
-        }
-        for (int i = 0; i < 9; i++) {
-          if (i != row) {
-            Node* adj_node = copy(n);
-            adj_node->sudo[row][col] = adj_node->sudo[i][col];
-            adj_node->sudo[i][col] = 0;
-            pushBack(list, adj_node);
-          }
-        }
-        int startRow = (row / 3) * 3;
-        int startCol = (col / 3) * 3;
-        for (int i = startRow; i < startRow + 3; i++) {
-          for (int j = startCol; j < startCol + 3; j++) {
-            if (i != row || j != col) {
-              Node* adj_node = copy(n);
-              adj_node->sudo[row][col] = adj_node->sudo[i][j];
-              adj_node->sudo[i][j] = 0;
-              pushBack(list, adj_node);
-            }
-          }
+        for (int num = 1; num <= 9; num++) {
+          Node* adj_node = copy(n);
+          adj_node->sudo[row][col] = num;
+          pushBack(list, adj_node);
         }
       }
     }
   }
-
   return list;
 }
+
 
 
 
