@@ -2,3 +2,21 @@ Sun 08 Oct 2023 03:25:57 AM UTC:
  tests:  0|5
 total_score: 0/70
 fa6f961
+Sun 08 Oct 2023 03:13:58 PM UTC: 
+ sudoku.c | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+In file included from test.c:5:
+sudoku.c: In function ‘is_valid’:
+sudoku.c:47:3: error: unknown type name ‘bool’
+   47 |   bool used[10];
+      |   ^~~~
+sudoku.c:50:18: error: ‘false’ undeclared (first use in this function); did you mean ‘fclose’?
+   50 |     memset(used, false, sizeof(used));
+      |                  ^~~~~
+      |                  fclose
+sudoku.c:50:18: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:56:19: error: ‘true’ undeclared (first use in this function)
+   56 |       used[num] = true;
+      |                   ^~~~
+Compilation failed
+6bf8eb5
