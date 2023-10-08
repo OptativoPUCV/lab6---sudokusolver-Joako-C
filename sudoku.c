@@ -118,7 +118,29 @@ int is_final(Node* n) {
 }
 
 
-Node* DFS(Node* initial, int* cont){
+Node* DFS(Node* initial, int* cont) {
+  if (!is_valid(initial)) {
+    return NULL;
+  }
+
+  if (is_final(initial)) {
+    return initial;
+  }
+
+  List* adj_nodes = get_adj_nodes(initial);
+  
+  while (!is_empty(adj_nodes)) {
+    Node* adj_node = (Node*)front(adj_nodes);
+    popFront(adj_nodes);
+    
+    Node* result = DFS(adj_node, cont);
+    (*cont)++;
+    
+    if (result != NULL) {
+      return result;
+    }
+  }
+  
   return NULL;
 }
 
