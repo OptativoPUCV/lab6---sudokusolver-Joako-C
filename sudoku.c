@@ -147,18 +147,14 @@ Node* DFS(Node* initial, int* cont) {
             }
         }
 
-        destroyList(adj_nodes); // Liberamos la lista de nodos adyacentes
+        // No liberamos la memoria de la lista de nodos adyacentes aquí
     }
 
     return NULL; // Si no se encontró una solución, retornamos NULL
 }
-  
-  return NULL;
-}
 
 
 
-/*
 int main( int argc, char *argv[] ){
 
   Node* initial= read_file("s12a.txt");;
@@ -169,4 +165,4 @@ int main( int argc, char *argv[] ){
   print_node(final);
 
   return 0;
-}*/
+}

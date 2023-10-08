@@ -211,3 +211,15 @@ sudoku.c:157:1: error: expected identifier or ‘(’ before ‘}’ token
 cc1: all warnings being treated as errors
 Compilation failed
 4fd3512
+Sun 08 Oct 2023 08:25:02 PM UTC: 
+ sudoku.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+test.c:245:5: error: redefinition of ‘main’
+  245 | int main( int argc, char *argv[] ) {
+      |     ^~~~
+In file included from test.c:5:
+sudoku.c:158:5: note: previous definition of ‘main’ was here
+  158 | int main( int argc, char *argv[] ){
+      |     ^~~~
+Compilation failed
+f418ba2
