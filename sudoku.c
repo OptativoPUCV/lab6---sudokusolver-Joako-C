@@ -105,15 +105,16 @@ List* get_adj_nodes(Node* n) {
           } else {
             // Si el nodo no es válido, debes liberar la memoria.
             free(adj_node);
-            // Agrega una salida de depuración para ver los nodos inválidos.
-            printf("Nodo inválido en (%d, %d) con valor %d\n", row, col, num);
           }
         }
+        // Importante: detener la generación de nodos si uno ya es inválido en esta posición.
+        break;
       }
     }
   }
   return list;
 }
+
 
 
 
