@@ -400,3 +400,27 @@ sudoku.c:163:28: error: ‘Node’ has no member named ‘next’
       |                            ^~
 Compilation failed
 6f4f4eb
+Sun 08 Oct 2023 09:32:42 PM UTC: 
+ sudoku.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:158:37: error: ‘n’ undeclared (first use in this function)
+  158 |     List* adj_nodes = get_adj_nodes(n);
+      |                                     ^
+sudoku.c:158:37: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:159:5: error: unknown type name ‘node’; did you mean ‘Node’?
+  159 |     node* next_node = adj_nodes->first;
+      |     ^~~~
+      |     Node
+sudoku.c:159:32: error: invalid use of incomplete typedef ‘List’
+  159 |     node* next_node = adj_nodes->first;
+      |                                ^~
+sudoku.c:162:32: error: request for member ‘data’ in something not a structure or union
+  162 |       pushBack(stack, next_node->data);
+      |                                ^~
+sudoku.c:163:28: error: request for member ‘next’ in something not a structure or union
+  163 |       next_node = next_node->next;
+      |                            ^~
+Compilation failed
+64ca92f
