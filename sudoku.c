@@ -143,37 +143,29 @@ int is_final(Node* n) {
 Node* DFS(Node* initial, int* cont) {
   List* stack = createList();
   pushBack(stack, initial);
-  
-  while (get_size(stack) > 0) {
-    Node* current = (Node*) last(stack);
+
+  while (!is_empty(stack)) {
+    Node* current = (Node*)last(stack);
     popBack(stack);
-    (*cont)++;
-    
+
     if (is_final(current)) {
-      // Si el nodo actual es un estado final, devuélvelo.
-      clean(stack); // Limpia la pila antes de salir
+      clean(stack);
       return current;
     }
-    
-    List* adj_nodes = get_adj_nodes(n);
-    Node* next_node = adj_nodes->first;
 
+    List* adj_nodes = get_adj_nodes(current);
+    node* next_node = adj_nodes->first;
+    
     while (next_node != NULL) {
       pushBack(stack, next_node->data);
       next_node = next_node->next;
     }
 
-
-
-    
-    clean(adj_nodes); // Limpia la lista de nodos adyacentes antes de la siguiente iteración
+    clean(adj_nodes);
     free(adj_nodes);
-    free(current);
+    (*cont)++;
   }
-  
-  // Si no se encontró una solución, devuelve NULL.
-  clean(stack); // Limpia la pila antes de salir
-  free(stack);
+
   return NULL;
 }
 
