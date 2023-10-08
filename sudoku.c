@@ -44,48 +44,48 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n) {
-  int used[10];
+    // Verificar filas y columnas
+    for (int i = 0; i < 9; i++) {
+        int row_used[10] = {0};
+        int col_used[10] = {0};
 
-  for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 10; j++) {
-      used[j] = 0;
-    }
-    for (int j = 0; j < 9; j++) {
-      int num = n->sudo[i][j];
-      if (num < 1 || num > 9 || used[num]) {
-        return 0;
-      }
-      used[num] = 1;
-    }
-    for (int j = 0; j < 10; j++) {
-      used[j] = 0;
-    }
-    for (int j = 0; j < 9; j++) {
-      int num = n->sudo[j][i];
-      if (num < 1 || num > 9 || used[num]) {
-        return 0;
-      }
-      used[num] = 1;
-    }
-  }
-  for (int startRow = 0; startRow < 9; startRow += 3) {
-    for (int startCol = 0; startCol < 9; startCol += 3) {
-      for (int j = 0; j < 10; j++) {
-        used[j] = 0;
-      }
-      for (int i = startRow; i < startRow + 3; i++) {
-        for (int j = startCol; j < startCol + 3; j++) {
-          int num = n->sudo[i][j];
-          if (num < 1 || num > 9 || used[num]) {
-            return 0;
-          }
-          used[num] = 1;
+        for (int j = 0; j < 9; j++) {
+            // Verificar filas
+            int num_row = n->sudo[i][j];
+            if (num_row < 1 || num_row > 9 || row_used[num_row]) {
+                return 0;
+            }
+            row_used[num_row] = 1;
+
+            // Verificar columnas
+            int num_col = n->sudo[j][i];
+            if (num_col < 1 || num_col > 9 || col_used[num_col]) {
+                return 0;
+            }
+            col_used[num_col] = 1;
         }
-      }
     }
-  }
-  return 1;
+
+    // Verificar regiones de 3x3
+    for (int startRow = 0; startRow < 9; startRow += 3) {
+        for (int startCol = 0; startCol < 9; startCol += 3) {
+            int region_used[10] = {0};
+
+            for (int i = startRow; i < startRow + 3; i++) {
+                for (int j = startCol; j < startCol + 3; j++) {
+                    int num = n->sudo[i][j];
+                    if (num < 1 || num > 9 || region_used[num]) {
+                        return 0;
+                    }
+                    region_used[num] = 1;
+                }
+            }
+        }
+    }
+
+    return 1; // Si pasa todas las verificaciones, el Sudoku es válido
 }
+
 
 
 List* get_adj_nodes(Node* n) {
