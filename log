@@ -97,3 +97,22 @@ Sun 08 Oct 2023 04:31:03 PM UTC:
  tests:  3|3
 total_score: 25/70
 4cfadc3
+Sun 08 Oct 2023 04:32:17 PM UTC: 
+ sudoku.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+In file included from test.c:5:
+sudoku.c: In function ‘is_valid’:
+sudoku.c:87:23: error: implicit declaration of function ‘get_adj_nodes’ [-Werror=implicit-function-declaration]
+   87 |     List* adj_nodes = get_adj_nodes(n);
+      |                       ^~~~~~~~~~~~~
+sudoku.c:87:23: error: initialization of ‘List *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+sudoku.c: At top level:
+sudoku.c:101:7: error: conflicting types for ‘get_adj_nodes’
+  101 | List* get_adj_nodes(Node* n) {
+      |       ^~~~~~~~~~~~~
+sudoku.c:87:23: note: previous implicit declaration of ‘get_adj_nodes’ was here
+   87 |     List* adj_nodes = get_adj_nodes(n);
+      |                       ^~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+88b85ea

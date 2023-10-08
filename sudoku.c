@@ -83,6 +83,16 @@ int is_valid(Node* n) {
         }
     }
 
+    // Verificar nodos adyacentes para completitud
+    List* adj_nodes = get_adj_nodes(n);
+    while (!is_empty(adj_nodes)) {
+        Node* adj_node = (Node*)front(adj_nodes);
+        popFront(adj_nodes);
+        if (!is_valid(adj_node)) {
+            return 0; // Si un nodo adyacente no es válido, el Sudoku no es válido
+        }
+    }
+
     return 1; // Si pasa todas las verificaciones, el Sudoku es válido
 }
 
