@@ -156,12 +156,13 @@ Node* DFS(Node* initial, int* cont) {
     }
     
     List* adj_nodes = get_adj_nodes(current);
-    Node* next = (Node*) first(adj_nodes);
-    
-    while (next != NULL) {
-      pushBack(stack, next);
-      next = (Node*) next(adj_nodes);
+    node* next_node = (node*) first(adj_nodes);
+
+    while (next_node != NULL) {
+      pushBack(stack, next_node->data);
+      next_node = next_node->next;
     }
+
     
     clean(adj_nodes); // Limpia la lista de nodos adyacentes antes de la siguiente iteración
     free(adj_nodes);
