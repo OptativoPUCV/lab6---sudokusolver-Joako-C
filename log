@@ -350,3 +350,24 @@ sudoku.c:163:28: error: request for member ‘next’ in something not a structu
       |                            ^~
 Compilation failed
 d851895
+Sun 08 Oct 2023 09:29:52 PM UTC: 
+ sudoku.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:5:
+sudoku.c: In function ‘DFS’:
+sudoku.c:159:24: error: ‘node’ undeclared (first use in this function); did you mean ‘Node’?
+  159 |     Node* next_node = (node*) first(adj_nodes);
+      |                        ^~~~
+      |                        Node
+sudoku.c:159:24: note: each undeclared identifier is reported only once for each function it appears in
+sudoku.c:159:29: error: expected expression before ‘)’ token
+  159 |     Node* next_node = (node*) first(adj_nodes);
+      |                             ^
+sudoku.c:162:32: error: ‘Node’ has no member named ‘data’
+  162 |       pushBack(stack, next_node->data);
+      |                                ^~
+sudoku.c:163:28: error: ‘Node’ has no member named ‘next’
+  163 |       next_node = next_node->next;
+      |                            ^~
+Compilation failed
+6a5facb
